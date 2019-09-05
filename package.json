@@ -1,0 +1,27 @@
+{
+  "name": "yideng-NODE",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "installConfig": {
+    "pnp": true
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon app.js",
+    "docs": "jsdoc ./**/*.js -d ./docs/jsdocs",
+    "build": "babel ./assets/script/index.js -o ./assets/script/index.bundle.js"
+  },
+  "dependencies": {
+    "koa": "^2.8.1",
+    "lodash": "^4.17.15",
+    "nodemon": "^1.19.1",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-cli": "^6.26.0",
+    "cross-env": "^5.2.1"
+  }
+}

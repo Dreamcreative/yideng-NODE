@@ -1,0 +1,26 @@
+{% extends '../layouts/layout.html' %}
+{% block title %} 根页面 {% endblock %}
+{% block head %}
+    {% endblock  %}
+{% block content %}
+    <div>
+        <h1>根页面</h1>
+        <div id="example">
+            <p>{{message}}</p>
+            <input v-model="message">
+        </div>
+     <div>
+{% endblock %}
+{% block scripts %}
+    <script type="module">
+        import("/script/index.js").then((_)=>{
+            _.default();
+        })
+    </script>
+    <script nomodule>
+        System.import("/script/index.bundle.js").then((_)=>{
+            _.default;
+        });
+        
+    </script>
+{% endblock %}
