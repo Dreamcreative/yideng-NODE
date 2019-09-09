@@ -11,11 +11,17 @@
     "docs": "jsdoc ./**/*.js -d ./docs/jsdocs",
     "build": "babel ./assets/script/index.js -o ./assets/script/index.bundle.js"
   },
+  "_moduleAliases": {
+    "@root": ".",
+    "@config": "config",
+    "@models":"models"
+  },
   "dependencies": {
     "koa": "^2.8.1",
     "koa-simple-router": "^0.2.0",
     "koa-swig": "^2.2.1",
     "lodash": "^4.17.15",
+    "module-alias": "^2.2.1",
     "nodemon": "^1.19.1",
     "swig": "^1.4.2"
   },

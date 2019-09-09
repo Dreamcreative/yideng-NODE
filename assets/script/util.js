@@ -16,12 +16,12 @@ _.isFunction = function(obj) {
   return typeof obj === "function" || false;
 };
 _.each = function(obj, iterate) {
-    if( Array.isArray(obj)){
-        //循环将obj 的值传入 回调函数中 执行
-        for(let item of obj){
-            iterate && iterate(item)
-        }
+  if (Array.isArray(obj)) {
+    //循环将obj 的值传入 回调函数中 执行
+    for (let item of obj) {
+      iterate && iterate(item);
     }
+  }
 };
 //得到 obj上的全部函数，并排序
 _.functions = function(obj) {
@@ -32,8 +32,29 @@ _.functions = function(obj) {
   }
   return names.sort();
 };
+// 节流
+_.throttle = function(fn, wait = 1000) {
+  var timer = null;
+  return function() {
+    if (!timer) {
+      timer = setTimeout(() => (timer = null), wait);
+      fn.apply(this, [...arguments]);
+    }
+  };
+};
+// 防抖
+_.debounce = function(fn, wait = 1000) {
+  var pre = 0;
+  return function(){
+    var now = new Date();
+    if( now -pre>=wait){
+      fn.apply(this,[... arguments])
+      pre = now;
+    }
+  }
+};
 _.mixin = function(obj) {
-    console.log("_.functions   " ,_.functions(obj))
+  console.log("_.functions   ", _.functions(obj));
   _.each(_.functions(obj), function(name) {
     let func = (_[name] = obj[name]);
     _.prototype[name] = function() {
@@ -41,7 +62,7 @@ _.mixin = function(obj) {
       let args = [this._wrapped];
       push.apply(args, arguments);
       //真正的执行
-       func.apply(_, args);
+      func.apply(_, args);
     };
   });
   return _;

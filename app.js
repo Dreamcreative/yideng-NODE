@@ -1,11 +1,22 @@
+require('module-alias/register') // 引入别名
 const Koa = require("koa");
 const app = new Koa();
-const config = require("./config/index")
+const config = require("@config/index")
 const controllersInit = require("./controllers");
-const render = require("koa-swig")
+const render = require("koa-swig") // 引入swig 模板
 const co = require('co');
-const serve = require('koa-static');
+const serve = require('koa-static'); 
+const errorHandle = require("./middlewares/errorHandle"); //引入错误处理
+const log4js = require('log4js');
+log4js.configure({
+  appenders: { cheese: { type: 'file', filename: './logs/error.log' } },
+  categories: { default: { appenders: ['cheese'], level: 'error' } }
+});
+const logger = log4js.getLogger('cheese');
 app.use(serve(config.staticDir));
+app.context.logger = logger;
+//容错处理中心
+errorHandle.error(app);
 app.context.render = co.wrap(render({
   root:config.viewDir,
   autoescape: true,
