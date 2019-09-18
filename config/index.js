@@ -6,7 +6,7 @@ let $config = {
 };
 if (process.env.NODE_ENV === "development") {
     const localConfig = {
-        port :8080
+        port :8089
     }
     $config = extend($config , localConfig)
 }
