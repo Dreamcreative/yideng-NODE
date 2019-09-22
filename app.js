@@ -15,7 +15,7 @@ log4js.configure({
 const logger = log4js.getLogger('cheese');
 app.use(serve(config.staticDir));
 app.context.logger = logger;
-//容错处理中心
+//容错处理中心,对node的处理 ,对页面的错误无效
 errorHandle.error(app);
 app.context.render = co.wrap(render({
   root:config.viewDir,
@@ -30,4 +30,8 @@ app.context.render = co.wrap(render({
 controllersInit(app);
 app.listen(config.port,()=>{
     console.log("服务启动成功，端口号为 ",config.port)
+})
+//如果上面的错误监听失效，也可以使用下面的方式监听
+app.on("error",(err)=>{
+  logger.error(err)
 })
