@@ -1,6 +1,6 @@
-const banner={
-    init(){
-        console.log("banner 入口")
+const banner = {
+    init() {
+        console.log("banner 入口");
     }
 }
-export default banner
+export default banner;

@@ -1,4 +1,4 @@
-import banner from "@components/banner/index"
-import list from "@components/list/index"
-list.init();
+import banner from "@components/banner/index";
+import list from "@components/list/index";
 banner.init();
+list.init();
